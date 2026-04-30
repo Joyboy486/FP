@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>EV Defect Sensor Monitoring System</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background: #eef2f3;
+text-align: center;
+padding: 30px;
+}        .container {
+background: white;
+padding: 25px;
+border-radius: 12px;
+width: 500px;
+margin: auto;
+box-shadow: 0 0 15px gray;}
+h2 {
+color: #2c3e50;
+}        .sensor {
+margin: 8px 0;        }
+.warning {
+color: red;
+font-weight: bold;}
+.safe {
+color: green;
+font-weight: bold;}
+button {
+padding: 10px 20px;
+margin-top: 15px;
+cursor: pointer;
+background: #3498db;
+color: white;
+border: none;
+border-radius: 5px;
+}
+button:hover {
+background: #2980b9;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Electric Vehicle Defect Sensor Dashboard</h2>
+<div class="sensor">Temperature: <span id="temp">0</span> °C</div>
+<div class="sensor">Battery Voltage: <span id="voltage">0</span> V</div>
+<div class="sensor">Motor Current: <span id="current">0</span> A</div>
+<div class="sensor">Vehicle Speed: <span id="speed">0</span> km/h</div>
+<div class="sensor">Brake Status: <span id="brake">Normal</span></div>
+<div class="sensor">Insulation Leakage: <span id="leakage">0</span> mA</div>
+<h3 id="status" class="safe">System Safe</h3>
+<button onclick="checkSensors()">Check All Sensors</button>
+</div>
+<script>function checkSensors() {
+// Simulated sensor values
+let temperature = Math.floor(Math.random() * 100);
+let voltage = Math.floor(Math.random() * 60);
+let current = Math.floor(Math.random() * 50);
+let speed = Math.floor(Math.random() * 120);
+let brakeFault = Math.random() < 0.2;
+// 20% chance brake fault
+let leakage = Math.floor(Math.random() * 20);
+// Display values
+document.getElementById("temp").innerText = temperature;    document.getElementById("voltage").innerText = voltage;    document.getElementById("current").innerText = current;    document.getElementById("speed").innerText = speed;    document.getElementById("brake").innerText = brakeFault ? "Brake Fault!" : "Normal";    document.getElementById("leakage").innerText = leakage;
+let status = document.getElementById("status");
+// Fault Conditions
+if (temperature > 60) {
+status.innerText = "Warning: Motor Overheating!";
+status.className = "warning";
+}    else if (voltage < 40) {
+status.innerText = "Warning: Low Battery Voltage!";
+status.className = "warning";
+}    else if (current > 35) {
+status.innerText = "Warning: Over Current Detected!";
+status.className = "warning";
+}
+else if (brakeFault) {
+status.innerText = "Warning: Brake System Fault!";
+status.className = "warning";
+}    else if (leakage > 10) {
+status.innerText = "Warning: Insulation Leakage Detected!";
+status.className = "warning";
+}    else {
+status.innerText = "System Safe";
+status.className = "safe";}}
+</script>
+</body>
+</html>
